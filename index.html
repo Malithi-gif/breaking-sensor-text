@@ -9,24 +9,28 @@
 <body>
   <nav class="nav">
     <div class="brand">Sensor<span>Text</span> Attack Demo</div>
-    <div>
+    <div class="nav-links">
       <a href="#overview">Overview</a>
-      <a href="#effects">Effects</a>
+      <a href="#pipeline">Pipeline</a>
       <a href="#interactive">Interactive Demo</a>
+      <a href="#results">Results</a>
       <a href="#datasets">Datasets</a>
     </div>
   </nav>
 
   <main class="hero">
     <div>
-      <div class="eyebrow">⚡ Breaking Sensor-Text Alignment </div>
+      <div class="eyebrow">⚡ CVPR 2026 Demo Website</div>
       <h1>Breaking Sensor-Text Alignment</h1>
       <p>
-        A visual demo for a cross-modal embedding poisoning attack on contrastive multimodal human activity recognition. The demo shows how small text-side embedding perturbations reduce cosine similarity, increase contrastive loss, and create semantic drift between sensor signals and activity descriptions.
+        A visual demo for a cross-modal embedding poisoning attack on contrastive multimodal
+        human activity recognition. The demo shows how small text-side embedding perturbations
+        reduce cosine similarity, increase contrastive loss, and create semantic drift between
+        wearable sensor signals and activity descriptions.
       </p>
       <div class="hero-actions">
-        <a class="btn primary" href="#interactive">Try the Interactive Demo</a>
-        <a class="btn" href="#effects">View Attack Effects</a>
+        <a class="btn primary" href="#interactive">Try Interactive Demo</a>
+        <a class="btn" href="#results">View Result Graphs</a>
       </div>
     </div>
 
@@ -45,11 +49,36 @@
     </div>
   </main>
 
-  <section id="overview">
+  <section id="overview" class="intro-section">
     <div class="section-title">
-      <h2>What the demo explains</h2>
+      <h2>Demo Overview</h2>
       <p>
-        The target model aligns sensor windows and natural-language activity descriptions in a shared embedding space. The attack perturbs the text embedding during inference, making the correct sensor-text pair less similar and pushing the system toward incorrect activity interpretation.
+        This demo website presents the main idea and experimental results of our CVPR 2026 paper,
+        <strong>“Breaking Sensor-Text Alignment: Cross-Modal Attack on Contrastive Multimodal
+        Human Activity Recognition.”</strong> The paper studies a security weakness in contrastive
+        multimodal HAR systems, where wearable sensor signals and natural-language activity
+        descriptions are aligned in a shared embedding space.
+      </p>
+      <p>
+        The demo shows how a small text-side embedding perturbation can reduce the correct
+        sensor-text cosine similarity, increase contrastive loss, and cause semantic drift. These
+        effects can make the model match a sensor pattern with an incorrect activity description.
+        The website also includes an interactive perturbation visualization and result graphs for
+        WISDM, MotionSense, HHAR, and WESAD.
+      </p>
+      <a class="btn primary" href="https://malithi-gif.github.io/breaking-sensor-text/" target="_blank">
+        Visit Demo Website
+      </a>
+    </div>
+  </section>
+
+  <section id="pipeline">
+    <div class="section-title">
+      <h2>How the attack works</h2>
+      <p>
+        The target model aligns sensor windows and natural-language activity descriptions in a shared
+        embedding space. The attack perturbs the text embedding during inference, making the correct
+        sensor-text pair less similar and pushing the system toward incorrect activity interpretation.
       </p>
     </div>
 
@@ -65,7 +94,7 @@
   <section id="effects">
     <div class="section-title">
       <h2>Attack effects shown in this website</h2>
-      <p>These are the main visual effects you can present in your CVPR demo or poster QR-code website.</p>
+      <p>These are the main visual effects you can present in your CVPR poster QR-code website.</p>
     </div>
     <div class="grid three">
       <div class="card"><span class="tag">Effect 01</span><h3>Similarity Drop</h3><p>The correct sensor-text cosine similarity decreases after perturbation, meaning the matched activity description becomes less reliable.</p></div>
@@ -124,6 +153,86 @@
     </div>
   </section>
 
+  <section id="results">
+    <div class="section-title">
+      <h2>Experimental Results</h2>
+      <p>
+        The graphs summarize the effect of the cross-modal embedding poisoning attack. The PGD-step
+        plots show how many optimization steps are needed for successful and failed attacks across
+        perturbation values. The norm plots show the relationship between L∞ and L2 perturbation
+        magnitudes, where stronger perturbations generally lead to more reliable attack success.
+      </p>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card large-card">
+        <img src="images/activity_alignment.png" alt="Traditional HAR and contrastive sensor-text alignment overview">
+        <h3>Traditional HAR vs. Contrastive HAR</h3>
+        <p>Traditional HAR directly classifies activities, while contrastive HAR aligns sensor embeddings and text embeddings in a shared space.</p>
+      </div>
+
+      <div class="result-card large-card">
+        <img src="images/attack_overview.png" alt="Cross-modal attack overview">
+        <h3>Cross-Modal Attack Overview</h3>
+        <p>The attacker injects a bounded perturbation into the text embedding during inference, causing target sensor-text misalignment.</p>
+      </div>
+
+      <div class="result-card full-card">
+        <img src="images/all_similarity_results.png" alt="Similarity and loss results across datasets and activities">
+        <h3>Similarity and Loss Changes</h3>
+        <p>The attack reduces adversarial similarity and increases contrastive loss across datasets and activities.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/pgd_wisdm.png" alt="WISDM PGD steps vs epsilon">
+        <h3>WISDM: PGD Steps vs Epsilon</h3>
+        <p>WISDM shows activity-level variation. Some activities require larger perturbations for successful misalignment.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/pgd_motionsense.png" alt="MotionSense PGD steps vs epsilon">
+        <h3>MotionSense: PGD Steps vs Epsilon</h3>
+        <p>MotionSense is highly sensitive to small perturbations, with many attacks succeeding at low epsilon values.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/pgd_hhar.png" alt="HHAR PGD steps vs epsilon">
+        <h3>HHAR: PGD Steps vs Epsilon</h3>
+        <p>HHAR shows strong attack sensitivity, where successful attacks often require very few PGD steps.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/pgd_wesad.png" alt="WESAD PGD steps vs epsilon">
+        <h3>WESAD: PGD Steps vs Epsilon</h3>
+        <p>WESAD stress and non-stress embeddings are highly vulnerable to embedding-level perturbations.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/norm_wisdm.png" alt="WISDM perturbation norm distribution">
+        <h3>WISDM: Perturbation Norms</h3>
+        <p>The L∞ and L2 norms increase with perturbation strength, showing how attack magnitude relates to success.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/norm_motionsense.png" alt="MotionSense perturbation norm distribution">
+        <h3>MotionSense: Perturbation Norms</h3>
+        <p>MotionSense shows a clear growth pattern between L∞ and L2 norms under successful attacks.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/norm_hhar.png" alt="HHAR perturbation norm distribution">
+        <h3>HHAR: Perturbation Norms</h3>
+        <p>HHAR results show that stronger perturbations usually produce more reliable attack success.</p>
+      </div>
+
+      <div class="result-card">
+        <img src="images/norm_wesad.png" alt="WESAD perturbation norm distribution">
+        <h3>WESAD: Perturbation Norms</h3>
+        <p>WESAD has larger L2 values because the physiological embedding space is very sensitive to perturbation.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="datasets">
     <div class="section-title">
       <h2>Datasets and observed sensitivity</h2>
@@ -141,7 +250,10 @@
     <div class="section-title">
       <h2>Key takeaway</h2>
       <p>
-        Contrastive sensor-text systems are powerful because they connect wearable signals with human-readable descriptions. However, this same alignment mechanism creates a new attack surface. A small embedding-level change can weaken the correct match, increase loss, and cause semantic misinterpretation.
+        Contrastive sensor-text systems are powerful because they connect wearable signals with
+        human-readable descriptions. However, this same alignment mechanism creates a new attack
+        surface. A small embedding-level change can weaken the correct match, increase loss, and
+        cause semantic misinterpretation.
       </p>
     </div>
   </section>

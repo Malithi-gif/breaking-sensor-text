@@ -1,35 +1,30 @@
-# CVPR Demo Website
+# Breaking Sensor-Text Alignment Demo Website
 
-Demo website for:
+Demo website for the CVPR 2026 paper:
 
 **Breaking Sensor-Text Alignment: Cross-Modal Attack on Contrastive Multimodal Human Activity Recognition**
+
+Website link:
+
+https://malithi-gif.github.io/breaking-sensor-text/
+
+## Overview
+
+This website visualizes a cross-modal embedding poisoning attack on contrastive multimodal human activity recognition. The demo explains how wearable sensor embeddings and natural-language activity descriptions are aligned in a shared embedding space, and how a small text-side perturbation can disrupt this alignment.
+
+## Website Features
+
+- Animated overview of sensor-text alignment
+- Cross-modal attack pipeline
+- Interactive epsilon perturbation demo
+- Similarity drop and contrastive loss visualization
+- Result graphs for WISDM, MotionSense, HHAR, and WESAD
+- PGD steps vs epsilon plots
+- L-infinity and L2 perturbation norm plots
 
 ## Files
 
 - `index.html` — main website page
 - `style.css` — website design and animations
 - `script.js` — interactive epsilon slider and dataset demo
-
-## How to run locally
-
-Open `index.html` in your browser.
-
-## How to deploy on GitHub Pages
-
-1. Create a new GitHub repository.
-2. Upload these three files to the repository:
-   - `index.html`
-   - `style.css`
-   - `script.js`
-3. Go to **Settings**.
-4. Click **Pages**.
-5. Under **Build and deployment**, choose:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/root`
-6. Click **Save**.
-7. Wait 1–2 minutes. GitHub will show your website link.
-
-Your link will look like:
-
-`https://YOUR-USERNAME.github.io/YOUR-REPOSITORY-NAME/`
+- `images/` — result figures and architecture diagrams
