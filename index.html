@@ -7,229 +7,204 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="progress" id="progress"></div>
+
   <nav class="nav">
-    <div class="brand">Sensor<span>Text</span> Attack Demo</div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    <a class="brand" href="#home">Sensor<span>Text</span> Alignment</a>
+    <button class="menu-btn" id="menuBtn">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="#intro">Introduction</a>
-      <a href="#concept">Concept</a>
-      <a href="#interactive">Demo</a>
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#datasets">Datasets</a>
+      <a href="#demo">Demo</a>
       <a href="#results">Results</a>
-      <a href="#github">GitHub</a>
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow">CVPR 2026 Demo Website</div>
+  <header id="home" class="hero">
+    <div class="hero-content reveal">
+      <div class="pill">CVPR 2026 Demo Website</div>
       <h1>Breaking Sensor-Text Alignment</h1>
-      <p>
-        This website demonstrates a cross-modal embedding poisoning attack on contrastive multimodal human activity recognition. It shows how a small perturbation in the text embedding space can reduce correct sensor-text similarity, increase contrastive loss, and cause semantic misalignment.
+      <p class="hero-text">
+        This website demonstrates a cross-modal embedding poisoning attack on contrastive multimodal human activity recognition. It visualizes how small text-side embedding perturbations can reduce sensor-text similarity, increase contrastive loss, and cause semantic misalignment between wearable sensor patterns and natural-language activity descriptions.
       </p>
       <div class="hero-actions">
-        <a class="btn primary" href="#interactive">Try Interactive Demo</a>
-        <a class="btn" href="#results">Explore Results</a>
+        <a class="btn primary" href="#demo">Try Interactive Demo</a>
+        <a class="btn ghost" href="#results">View Results</a>
+        <a class="btn link" href="https://malithi-gif.github.io/breaking-sensor-text/" target="_blank">Live Website ↗</a>
       </div>
     </div>
 
-    <div class="hero-visual" aria-label="Animated sensor-text alignment attack">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="flow-line line-a"></div>
-      <div class="flow-line line-b"></div>
-      <div class="flow-line line-c"></div>
-      <div class="node sensor">📱<strong>Sensor</strong><span>Window</span></div>
-      <div class="node encoder">🧠<strong>Encoders</strong><span>Sensor + Text</span></div>
-      <div class="node space">🔗<strong>Shared Space</strong><span>Cosine Similarity</span></div>
-      <div class="node attack">δ<strong>Attack</strong><span>Text Perturbation</span></div>
-      <div class="node output">⚠️<strong>Misalignment</strong><span>Wrong Match</span></div>
+    <div class="hero-card reveal">
+      <div class="orbit-wrap">
+        <div class="core">δ</div>
+        <div class="orbit orbit-1"><span></span></div>
+        <div class="orbit orbit-2"><span></span></div>
+        <div class="orbit orbit-3"><span></span></div>
+      </div>
+      <div class="hero-stats">
+        <div><strong>4</strong><span>Datasets</span></div>
+        <div><strong>64D</strong><span>Embedding Space</span></div>
+        <div><strong>ε</strong><span>Attack Budget</span></div>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section id="intro" class="section">
-      <div class="section-title">
-        <h2>Demo Overview</h2>
+  <section id="overview" class="section">
+    <div class="section-head reveal">
+      <span class="kicker">Overview</span>
+      <h2>Traditional HAR vs. Contrastive HAR</h2>
+      <p>
+        Traditional HAR directly maps multimodal sensor data to activity classes. In contrastive HAR, a sensor encoder and a text encoder align sensor embeddings and activity-description embeddings in a shared space, enabling semantic interpretation of human activities.
+      </p>
+    </div>
+    <div class="image-feature reveal">
+      <img src="images/overview_har_contrastive.png" alt="Traditional HAR and HAR with contrastive learning overview" />
+      <div class="caption-card">
+        <h3>What this figure shows</h3>
         <p>
-          This demo website presents the main idea and experimental results of the paper <strong>“Breaking Sensor-Text Alignment: Cross-Modal Attack on Contrastive Multimodal Human Activity Recognition.”</strong> The paper studies a security weakness in contrastive multimodal HAR systems, where wearable sensor signals and natural-language activity descriptions are aligned in a shared embedding space.
-        </p>
-        <p>
-          The demo explains how a bounded text-side embedding perturbation can reduce correct sensor-text cosine similarity, increase contrastive loss, and create semantic drift. These effects can cause the model to match a sensor pattern with an incorrect activity description.
-        </p>
-        <a class="btn primary" href="https://malithi-gif.github.io/breaking-sensor-text/" target="_blank" rel="noopener">Visit Live Website</a>
-      </div>
-    </section>
-
-    <section id="concept" class="section alt">
-      <div class="section-title">
-        <h2>Concept Figures</h2>
-        <p>
-          These two figures are moved out of the Results section. The first figure explains the difference between traditional HAR and contrastive HAR. The second figure explains how sensor-text misalignment happens under the proposed attack.
+          The top part shows conventional activity classification. The bottom part shows the contrastive learning pipeline, where sensor embeddings and text embeddings are matched through shared-space similarity.
         </p>
       </div>
+    </div>
+  </section>
 
-      <div class="concept-grid">
-        <article class="figure-card wide">
-          <img src="images/traditional_vs_contrastive.png" alt="Traditional HAR and HAR with contrastive learning" />
-          <div>
-            <h3>Traditional HAR vs. Contrastive HAR</h3>
-            <p>
-              Traditional HAR directly classifies sensor data into activity labels, while contrastive HAR aligns sensor embeddings and text embeddings in a shared embedding space.
-            </p>
-          </div>
-        </article>
-
-        <article class="figure-card wide">
-          <img src="images/sensor_text_misalignment.png" alt="Sensor-text misalignment attack pipeline" />
-          <div>
-            <h3>How Sensor-Text Misalignment Happens</h3>
-            <p>
-              The attacker injects a bounded perturbation into the text embedding during inference. This shifts the text representation and causes similarity with the correct sensor embedding to go down.
-            </p>
-          </div>
-        </article>
+  <section id="method" class="section dark-section">
+    <div class="section-head reveal">
+      <span class="kicker">Method</span>
+      <h2>How sensor-text misalignment happens</h2>
+      <p>
+        The attack targets the text embedding branch during inference. A bounded perturbation δ shifts the text embedding, reducing correct sensor-text alignment and causing the model to match the sensor pattern with an incorrect semantic description.
+      </p>
+    </div>
+    <div class="image-feature wide reveal">
+      <img src="images/method_misalignment.png" alt="Sensor-text misalignment attack method" />
+      <div class="method-cards">
+        <article><b>1</b><h3>Encode</h3><p>Sensor and text inputs are mapped into a shared embedding space.</p></article>
+        <article><b>2</b><h3>Perturb</h3><p>The attacker injects a bounded text-side embedding perturbation.</p></article>
+        <article><b>3</b><h3>Misalign</h3><p>Similarity goes down and the wrong activity description can be selected.</p></article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="effects" class="section">
-      <div class="section-title">
-        <h2>Main Attack Effects</h2>
-        <p>The website focuses on three visible effects of the attack.</p>
-      </div>
-      <div class="effect-grid">
-        <div class="effect-card"><span>01</span><h3>Similarity Drop</h3><p>The correct sensor-text cosine similarity decreases after perturbation.</p></div>
-        <div class="effect-card"><span>02</span><h3>Loss Increase</h3><p>The contrastive loss increases because the aligned pair is pushed apart.</p></div>
-        <div class="effect-card"><span>03</span><h3>Semantic Drift</h3><p>The poisoned text embedding moves toward an incorrect semantic interpretation.</p></div>
-      </div>
-    </section>
+  <section id="datasets" class="section">
+    <div class="section-head reveal">
+      <span class="kicker">Datasets</span>
+      <h2>Evaluation across motion and physiological sensing</h2>
+      <p>
+        The attack is evaluated on four datasets to study how cross-modal embedding perturbations behave across different sensors, activity classes, and physiological states.
+      </p>
+    </div>
+    <div class="dataset-grid reveal">
+      <article class="dataset-card" data-dataset-card="WISDM"><span>Motion HAR</span><h3>WISDM</h3><p>Smartphone accelerometer data for daily activities. Shows activity-level variation, with Downstairs more vulnerable than Standing and Walking.</p></article>
+      <article class="dataset-card" data-dataset-card="MotionSense"><span>Motion HAR</span><h3>MotionSense</h3><p>Accelerometer and gyroscope signals. Highly sensitive to small perturbations, with attacks succeeding at low epsilon values.</p></article>
+      <article class="dataset-card" data-dataset-card="HHAR"><span>Heterogeneous HAR</span><h3>HHAR</h3><p>Smartphone and smartwatch data. Small positive perturbations reliably disrupt sensor-text alignment.</p></article>
+      <article class="dataset-card" data-dataset-card="WESAD"><span>Physiological Signals</span><h3>WESAD</h3><p>Stress and non-stress biosignals. Highly sensitive to embedding-level perturbations across physiological states.</p></article>
+    </div>
+  </section>
 
-    <section id="interactive" class="section alt">
-      <div class="section-title">
-        <h2>Interactive Perturbation Demo</h2>
-        <p>
-          Select a dataset and move the epsilon slider. The demo updates similarity, loss, and the poisoned text embedding position.
-        </p>
-      </div>
+  <section id="demo" class="section dark-section">
+    <div class="section-head reveal">
+      <span class="kicker">Interactive Demo</span>
+      <h2>Move ε and watch the alignment change</h2>
+      <p>
+        This demo simulates how the perturbation budget changes similarity, contrastive loss, and semantic drift in the shared embedding space.
+      </p>
+    </div>
 
-      <div class="demo-panel">
-        <div class="controls">
-          <label for="dataset">Dataset</label>
-          <select id="dataset">
-            <option value="wisdm">WISDM</option>
-            <option value="motionsense">MotionSense</option>
-            <option value="hhar">HHAR</option>
-            <option value="wesad">WESAD</option>
-          </select>
+    <div class="demo-grid reveal">
+      <div class="control-panel">
+        <label for="demoDataset">Dataset</label>
+        <select id="demoDataset">
+          <option value="wisdm">WISDM</option>
+          <option value="motionsense">MotionSense</option>
+          <option value="hhar">HHAR</option>
+          <option value="wesad">WESAD</option>
+        </select>
 
-          <label for="epsilon">Perturbation budget ε: <strong id="epsValue">1</strong></label>
-          <input id="epsilon" type="range" min="0" max="10" value="1" step="0.5" />
+        <label for="epsilon">Perturbation budget ε: <strong id="epsValue">1</strong></label>
+        <input id="epsilon" type="range" min="0" max="10" value="1" step="0.5" />
 
-          <div class="bar-wrap">
-            <div class="bar-label"><span>Adversarial similarity</span><span id="simLabel">0.48</span></div>
-            <div class="bar"><div class="fill sim" id="simFill"></div></div>
-            <div class="bar-label"><span>Contrastive loss</span><span id="lossLabel">0.52</span></div>
-            <div class="bar"><div class="fill loss" id="lossFill"></div></div>
-          </div>
+        <div class="meter-block">
+          <div class="meter-label"><span>Adversarial Similarity</span><span id="simText">0.48</span></div>
+          <div class="meter"><div id="simMeter" class="meter-fill similarity"></div></div>
         </div>
 
-        <div class="demo-output">
-          <div class="metric-box">
-            <div class="metric"><strong id="originalSim">0.57</strong><span>Original similarity</span></div>
-            <div class="metric"><strong id="advSim">0.48</strong><span>After attack</span></div>
-            <div class="metric"><strong id="loss">0.52</strong><span>Loss after attack</span></div>
-          </div>
-          <div class="viz">
-            <div class="axis"></div>
-            <div class="drift-line" id="driftLine"></div>
-            <div class="dot sensor-dot" title="Sensor embedding"></div>
-            <div class="dot text-dot" title="Original text embedding"></div>
-            <div class="dot adv-dot" id="advDot" title="Poisoned text embedding"></div>
-            <div class="legend">
-              <div><span class="legend-dot sensor-color"></span>Sensor embedding</div>
-              <div><span class="legend-dot text-color"></span>Original text embedding</div>
-              <div><span class="legend-dot adv-color"></span>Poisoned text embedding</div>
-            </div>
-          </div>
+        <div class="meter-block">
+          <div class="meter-label"><span>Contrastive Loss</span><span id="lossText">0.52</span></div>
+          <div class="meter"><div id="lossMeter" class="meter-fill loss"></div></div>
         </div>
       </div>
-    </section>
 
-    <section id="results" class="section">
-      <div class="section-title">
-        <h2>Interactive Result Graphs</h2>
-        <p>
-          The architecture and attack overview figures are not included here. This Results section only contains experimental graphs. Use the controls to switch datasets and graph types.
-        </p>
-      </div>
-
-      <div class="results-dashboard">
-        <div class="graph-controls">
-          <button class="chip active" data-graph="similarity">Similarity & Loss</button>
-          <button class="chip" data-graph="pgd">PGD Steps vs. ε</button>
-          <button class="chip" data-graph="norm">L∞ vs. L2 Norms</button>
+      <div class="embedding-panel">
+        <div class="metric-row">
+          <div><strong id="baseSim">0.57</strong><span>Original similarity</span></div>
+          <div><strong id="attackSim">0.48</strong><span>After attack</span></div>
+          <div><strong id="attackLoss">0.52</strong><span>Loss after attack</span></div>
         </div>
-
-        <div class="dataset-tabs">
-          <button class="tab active" data-dataset="wisdm">WISDM</button>
-          <button class="tab" data-dataset="motionsense">MotionSense</button>
-          <button class="tab" data-dataset="hhar">HHAR</button>
-          <button class="tab" data-dataset="wesad">WESAD</button>
-        </div>
-
-        <div class="graph-stage">
-          <button class="arrow" id="prevGraph" aria-label="Previous graph">‹</button>
-          <figure class="interactive-figure">
-            <img id="resultImage" src="images/similarity_loss_all.png" alt="Similarity and loss graph" />
-            <figcaption>
-              <h3 id="resultTitle">Similarity and Loss Changes</h3>
-              <p id="resultCaption">
-                This graph shows original similarity, adversarial similarity, loss before attack, and loss after attack across datasets and activities.
-              </p>
-            </figcaption>
-          </figure>
-          <button class="arrow" id="nextGraph" aria-label="Next graph">›</button>
-        </div>
-
-        <div class="result-note" id="resultNote">
-          Tip: Click the graph to enlarge it. Use keyboard Esc to close the preview.
+        <div class="embedding-space">
+          <div class="axis x-axis"></div>
+          <div class="axis y-axis"></div>
+          <div class="point sensor-point"><span>Sensor</span></div>
+          <div class="point text-point"><span>Text</span></div>
+          <div class="drift-arrow" id="driftArrow"></div>
+          <div class="point adv-point" id="advPoint"><span>Poisoned</span></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="github" class="section alt">
-      <div class="section-title">
-        <h2>GitHub Deployment</h2>
-        <p>Upload these files to your GitHub repository root. Do not place them inside another folder.</p>
-      </div>
-      <div class="code-card">
-        <pre><code>breaking-sensor-text/
-├── index.html
-├── style.css
-├── script.js
-├── README.md
-└── images/
-    ├── traditional_vs_contrastive.png
-    ├── sensor_text_misalignment.png
-    ├── similarity_loss_all.png
-    ├── pgd_wisdm.png
-    ├── pgd_motionsense.png
-    ├── pgd_hhar.png
-    ├── pgd_wesad.png
-    ├── norm_wisdm.png
-    ├── norm_motionsense.png
-    ├── norm_hhar.png
-    └── norm_wesad.png</code></pre>
-      </div>
-    </section>
-  </main>
+  <section id="results" class="section">
+    <div class="section-head reveal">
+      <span class="kicker">Results</span>
+      <h2>Interactive result viewer</h2>
+      <p>
+        Select a dataset to view the corresponding PGD steps vs. epsilon plot and perturbation norm plot. Use the graph buttons to switch between result types.
+      </p>
+    </div>
 
-  <div class="modal" id="imageModal" aria-hidden="true">
-    <button class="modal-close" id="modalClose">×</button>
-    <img id="modalImage" alt="Expanded result graph" />
+    <div class="results-shell reveal">
+      <div class="dataset-tabs" role="tablist" aria-label="Dataset result tabs">
+        <button class="tab active" data-dataset="wisdm">WISDM</button>
+        <button class="tab" data-dataset="motionsense">MotionSense</button>
+        <button class="tab" data-dataset="hhar">HHAR</button>
+        <button class="tab" data-dataset="wesad">WESAD</button>
+      </div>
+
+      <div class="result-controls">
+        <button class="graph-btn active" data-graph="pgd">PGD Steps</button>
+        <button class="graph-btn" data-graph="norm">L∞ vs L2 Norm</button>
+        <button class="graph-btn" data-graph="summary">Similarity/Loss Summary</button>
+      </div>
+
+      <div class="result-viewer">
+        <button class="arrow-btn" id="prevResult">‹</button>
+        <figure class="result-figure">
+          <img id="resultImage" src="images/pgd_wisdm.png" alt="WISDM PGD result" />
+          <figcaption>
+            <h3 id="resultTitle">WISDM: PGD Steps vs. Epsilon</h3>
+            <p id="resultText">Failed attacks are concentrated at high PGD budgets, while successful attacks generally require fewer steps as ε increases.</p>
+          </figcaption>
+        </figure>
+        <button class="arrow-btn" id="nextResult">›</button>
+      </div>
+
+      <div class="result-insights" id="resultInsights">
+        <div><strong>Observation</strong><span>WISDM shows activity-level variation in attack success.</span></div>
+        <div><strong>Effect</strong><span>Stronger perturbations generally reduce alignment and improve attack reliability.</span></div>
+        <div><strong>Takeaway</strong><span>Contrastive sensor-text matching needs stronger robustness checks.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button id="closeLightbox">×</button>
+    <img id="lightboxImage" alt="Enlarged result graph" />
   </div>
 
   <footer class="footer">
-    Breaking Sensor-Text Alignment: Cross-Modal Attack on Contrastive Multimodal Human Activity Recognition · CVPR 2026 Demo
+    <p><strong>Breaking Sensor-Text Alignment</strong> · Cross-Modal Attack on Contrastive Multimodal Human Activity Recognition</p>
+    <a href="https://malithi-gif.github.io/breaking-sensor-text/" target="_blank">https://malithi-gif.github.io/breaking-sensor-text/</a>
   </footer>
 
   <script src="script.js"></script>
