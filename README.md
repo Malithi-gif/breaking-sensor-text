@@ -10,21 +10,41 @@ https://malithi-gif.github.io/breaking-sensor-text/
 
 ## Overview
 
-This website visualizes a cross-modal embedding poisoning attack on contrastive multimodal human activity recognition. The demo explains how wearable sensor embeddings and natural-language activity descriptions are aligned in a shared embedding space, and how a small text-side perturbation can disrupt this alignment.
+This website visualizes a cross-modal embedding poisoning attack on contrastive multimodal human activity recognition. It explains the difference between traditional HAR and contrastive sensor-text HAR, shows how sensor-text misalignment happens, and provides interactive result graphs.
 
 ## Website Features
 
-- Animated overview of sensor-text alignment
-- Cross-modal attack pipeline
+- Introduction section with live website link
+- Concept section for traditional HAR vs contrastive HAR
+- Concept section for sensor-text misalignment attack
 - Interactive epsilon perturbation demo
-- Similarity drop and contrastive loss visualization
-- Result graphs for WISDM, MotionSense, HHAR, and WESAD
-- PGD steps vs epsilon plots
-- L-infinity and L2 perturbation norm plots
+- Interactive result graph viewer
+- Dataset tabs for WISDM, MotionSense, HHAR, and WESAD
+- Graph type controls for PGD steps and L∞/L2 norm plots
+- Click-to-enlarge graph preview
 
 ## Files
 
 - `index.html` — main website page
 - `style.css` — website design and animations
-- `script.js` — interactive epsilon slider and dataset demo
-- `images/` — result figures and architecture diagrams
+- `script.js` — interactive controls and graph viewer
+- `images/` — architecture diagrams and result graphs
+
+## GitHub Pages
+
+Upload all files directly to the repository root. The repository should look like this:
+
+```text
+breaking-sensor-text/
+├── index.html
+├── style.css
+├── script.js
+├── README.md
+└── images/
+```
+
+Then enable GitHub Pages:
+
+```text
+Settings → Pages → Deploy from a branch → main → /root → Save
+```
