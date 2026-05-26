@@ -1,24 +1,12 @@
-# Breaking Sensor-Text Alignment Demo Website
+# CVPR 2026 Interactive Website
 
-Demo website for the CVPR 2026 paper:
+This static website is split into separate files:
 
-**Breaking Sensor-Text Alignment: Cross-Modal Attack on Contrastive Multimodal Human Activity Recognition**
+- `index.html` — page structure
+- `style.css` — visual design and responsive layout
+- `script.js` — dataset tabs, epsilon slider, and interactive canvas chart
+- `assets/` — figures extracted from the paper
 
-Live website:
+## Deploy on GitHub Pages
 
-https://malithi-gif.github.io/breaking-sensor-text/
-
-## Sections
-
-- Overview: Traditional HAR vs. contrastive HAR
-- Method: Sensor-text misalignment attack pipeline
-- Datasets: WISDM, MotionSense, HHAR, and WESAD
-- Demo: Interactive epsilon perturbation visualization
-- Results: Interactive dataset buttons for PGD and perturbation norm graphs
-
-## Files
-
-- `index.html` — main website page
-- `style.css` — website design and animations
-- `script.js` — interactive controls
-- `images/` — concept figures and result graphs
+Upload all files and the `assets` folder to your repository, then enable GitHub Pages from Settings → Pages.
